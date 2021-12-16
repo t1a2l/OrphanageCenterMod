@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrphanageCenterMod", "OrphanageCenterMod\OrphanageCenterMod.csproj", "{DE103343-4925-4E44-B53E-288D511F92D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE103343-4925-4E44-B53E-288D511F92D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE103343-4925-4E44-B53E-288D511F92D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE103343-4925-4E44-B53E-288D511F92D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE103343-4925-4E44-B53E-288D511F92D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E3D14EC-2510-46E0-8475-E6CE75E4DFC2}
+	EndGlobalSection
+EndGlobal
