@@ -413,7 +413,7 @@ namespace OrphanageCenterMod.AI {
                 return;
             }
 
-            // Fetch a Senior Citizen
+            // Fetch a Child
             OrphanageManager orphanageManager = OrphanageManager.getInstance();
             uint[] familyWithChildren = orphanageManager.getFamilyWithChildren();
             if (familyWithChildren == null) {

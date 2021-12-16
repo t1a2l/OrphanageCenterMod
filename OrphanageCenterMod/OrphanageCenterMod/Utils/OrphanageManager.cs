@@ -89,7 +89,7 @@ namespace OrphanageCenterMod.Utils {
                 return null;
             }
 
-            // Get random family that contains at least one senior
+            // Get random family that contains at least one child
             uint[] family = this.getFamilyWithChildrenInternal(numAttempts);
             if (family == null) {
                 Logger.logInfo(LOG_CHILDREN, "OrphanageManager.getFamilyWithChildren -- No Family");
@@ -97,7 +97,7 @@ namespace OrphanageCenterMod.Utils {
                 return null;
             }
 
-            // Mark all seniors in the family as being processed
+            // Mark all children in the family as being processed
             foreach (uint familyMember in family) {
                 if (this.isChild(familyMember)) {
                     this.childrenBeingProcessed.Add(familyMember);
@@ -120,7 +120,7 @@ namespace OrphanageCenterMod.Utils {
                 return null;
             }
 
-            // Get a random senior citizen
+            // Get a random child
             uint familyId = this.fetchRandomFamilyWithChildren();
             Logger.logInfo(LOG_CHILDREN, "OrphanageManager.getFamilyWithChildrenInternal -- Family Id: {0}", familyId);
             if (familyId == 0) {
@@ -129,24 +129,24 @@ namespace OrphanageCenterMod.Utils {
             }
 
 
-            // Validate all seniors in the family and build an array of family members
-            CitizenUnit familyWithSenior = this.citizenManager.m_units.m_buffer[familyId];
+            // Validate all children in the family and build an array of family members
+            CitizenUnit familyWithChildren = this.citizenManager.m_units.m_buffer[familyId];
             uint[] family = new uint[5];
-            bool seniorPresent = false;
+            bool childrenPresent = false;
             for (int i = 0; i < 5; i++) {
-                uint familyMember = familyWithSenior.GetCitizen(i);
+                uint familyMember = familyWithChildren.GetCitizen(i);
                 if (this.isChild(familyMember)) {
                     if (!this.validateChild(familyMember)) {
                         // This particular Child is no longer valid for some reason, call recursively with one less attempt
                         return this.getFamilyWithChildrenInternal(--numAttempts);
                     }
-                    seniorPresent = true;
+                    childrenPresent = true;
                 }
                 Logger.logInfo(LOG_CHILDREN, "OrphanageManager.getFamilyWithChildrenInternal -- Family Member: {0}", familyMember);
                 family[i] = familyMember;
             }
 
-            if (!seniorPresent) {
+            if (!childrenPresent) {
                 // No Senior was found in this family (which is a bit weird), try again
                 return this.getFamilyWithChildrenInternal(--numAttempts);
             }
@@ -188,8 +188,14 @@ namespace OrphanageCenterMod.Utils {
                 return false;
             }
 
+            // check for invalid flags and ignore them
+            Citizen child = this.citizenManager.m_citizens.m_buffer[childId];
+            if((child.m_flags & Citizen.Flags.Created) == 0) {
+                return false;
+            }
+
             // Validate not homeless
-            ushort homeBuildingId = this.citizenManager.m_citizens.m_buffer[childId].m_homeBuilding;
+            ushort homeBuildingId = child.m_homeBuilding;
             if (homeBuildingId == 0) {
                 return false;
             }
